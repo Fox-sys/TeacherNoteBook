@@ -1,0 +1,6 @@
+*.pyc
+env/
+.vscode
+Makefile
+.env.prod
+.env.prod.db
