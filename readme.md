@@ -13,3 +13,10 @@
 - django 3.2.0
 - PostgreSQL 12.0
 - Docker and Docker Compose
+
+
+## Patch Note:
+
+### Version: 0.1.0
+
+- Added first models and some setting in admin
