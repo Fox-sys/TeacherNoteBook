@@ -35,6 +35,7 @@ class Schedule(models.Model):
 
 
 class ScheduleLesson(models.Model):
+    teacher = models.ForeignKey('Teacher', on_delete=models.CASCADE)
     subject = models.CharField('Предмет', max_length=150)
     student = models.ForeignKey('Student', on_delete=models.CASCADE)
     start_time = models.TimeField('Начало урока')

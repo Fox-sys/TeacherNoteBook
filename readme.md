@@ -17,6 +17,6 @@
 
 ## Patch Note:
 
-### Version: 0.1.0
+### Version: 0.2.0 (dev)
 
-- Added first models and some setting in admin
+- Added first page with schedule lesson 
