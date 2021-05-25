@@ -17,6 +17,6 @@
 
 ## Patch Note:
 
-### Version: 0.2.0 (dev)
+### Version: 0.2.0 
 
 - Added first page with schedule lesson 

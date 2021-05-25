@@ -1,8 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from calendar import day_abbr
+from datetime import date
 
 class Teacher(AbstractUser):
-    schedule = models.ForeignKey('Schedule', on_delete=models.SET_NULL, null=True, blank=True)
+    schedule = models.OneToOneField('Schedule', on_delete=models.SET_NULL, null=True, blank=True)
     passed_lessons = models.ManyToManyField('PassedLessons', 'прошедшие_уроки', blank=True)
 
     def __str__(self):
@@ -21,6 +23,7 @@ class Schedule(models.Model):
     friday = models.ManyToManyField('ScheduleLesson', 'Пятница', blank=True)
     saturday = models.ManyToManyField('ScheduleLesson', 'Суббота', blank=True)
     sunday = models.ManyToManyField('ScheduleLesson', 'Воскресенье', blank=True)
+    
 
     def __str__(self):
         try:
@@ -28,6 +31,18 @@ class Schedule(models.Model):
             return f'({self.id}) - {teacher.first_name} {teacher.last_name}'
         except Exception:
             return f'({self.id})'
+
+    def get_today_schedule(self):
+        days = {
+            'Mon': self.monday,
+            'Tue': self.tuesday,
+            'Wed': self.wednesday,
+            'Thu': self.thursday,
+            'Fri': self.friday,
+            'Sat': self.saturday,
+            'Sun': self.sunday,
+        }   
+        return days[day_abbr[date.today().weekday()]].all()       
         
     class Meta:
         verbose_name = 'Расписание'

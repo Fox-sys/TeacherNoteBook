@@ -10,8 +10,10 @@ class IndexDetailView(generic.ListView):
     def get_queryset(self):
         user = self.request.user
         if user.is_authenticated:
-            return ScheduleLesson.objects.filter(teacher=user).order_by('start_time')
-        else: return ScheduleLesson.objects.none()
+            teacher = Teacher.objects.get(id = user.id)
+            print(teacher.schedule)
+            return teacher.schedule.get_today_schedule().order_by('start_time')
+        return ScheduleLesson.objects.none()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()

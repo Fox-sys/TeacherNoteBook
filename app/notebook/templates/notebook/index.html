@@ -1,19 +1,20 @@
 {% extends 'notebook/base.html' %}
 {% block title %}Главная{% endblock %}
 {% block content %}
-{% if user.is_authenticated %}
-Добро пожаловать, {{ user.first_name }} <br><br>
-{% for i in object_list %}
-<div>
-    {{ i.student.first_name }} ({{ i.student.last_name }}) <br>
-    урок: {{ i.subject }} <br>
-    цена: {{ i.price }} <br>
-    Начало: {{ i.start_time|time:"H:i" }} <br>
-    Конец: {{ i.end_time|time:"H:i" }}
-</div>
-<br>
-{% endfor %}
-{% else %}
-Вы не авторизованны!
-{% endif %}
+    {% if user.is_authenticated %}
+        Добро пожаловать, {{ user.first_name }} <br><br>
+        Ваше расписание на сегодня: <br>
+        {% for i in object_list %}
+            <div>
+                {{ i.student.first_name }} ({{ i.student.last_name }}) <br>
+                урок: {{ i.subject }} <br>
+                цена: {{ i.price }} <br>
+                Начало: {{ i.start_time|time:"H:i" }} <br>
+                Конец: {{ i.end_time|time:"H:i" }}
+            </div>
+            <br>
+        {% endfor %}
+    {% else %}
+        Вы не авторизованны!
+    {% endif %}
 {% endblock %}
